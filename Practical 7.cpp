@@ -1,61 +1,66 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
-class student
+class String
 {
-    int rollno;
-    char Name[10];
-    char Grade;
-    float percentage;
-   
+private:
+    char* str;
+
 public:
-    void accept(int a, char b[],char c,float d)
+    // Default Constructor
+    String()
     {
-     rollno=a;
-     
-        for (int i=0;i<10;i++)
-        {
-            Name[i] = b[i];
-            
-        }
-        
-     
-     Grade=c;
-     percentage=d;
-        
+        str = new char[1];
+        str[0] = '\0';
     }
 
-    void display()
+    // Parameterized Constructor
+    String(const char* s)
     {
-    
-            cout <<"\n*The student information is as follows:"<<endl;
-    
-            cout <<"\nRoll No.="<<rollno<<endl;
-            cout <<"\nName Of the student ="<<Name<<endl;
-            cout <<"\nGrade secured="<<Grade<<endl;
-            cout <<"\nPercentage scored="<<percentage<<endl;
+        str = new char[strlen(s) + 1];
+        strcpy(str, s);
     }
 
-       
+    // Copy Constructor
+    String(const String& s)
+    {
+        str = new char[strlen(s.str) + 1];
+        strcpy(str, s.str);
+    }
+
+    void Accept()
+    {
+        char temp[100];
+        cout << "Enter string: ";
+        cin.getline(temp, 100);
+        delete[] str;
+        str = new char[strlen(temp) + 1];
+        strcpy(str, temp);
+    }
+
+    void Display() const
+    {
+        cout << "String: " << str << endl;
+    }
+
+    ~String()
+    {
+        delete[] str;
+    }
 };
 
 int main()
-{ int a; 
-char b[10]; 
-char c;
-float d;
-    student s1;
-    cout<<"Enter your details:";
-    cout<<"\nEnter your roll no:";
-    cin>>a;
-    cout<<"\nEnter your name:";
-    cin>>b;
-    cout<<"\nEnter your grade:";
-    cin>>c;
-    cout<<"\nEnter your percentage:";
-    cin>>d;
+{
+    String s1;
+    s1.Accept();
+    s1.Display();
 
-   s1.accept(a,b,c,d);
-    s1.display();
+    String s2("shardul(Bauna Don)(5.4ft)");
+    s2.Display();
+
+    String s3 = s2;
+    s3.Display();
+
     return 0;
 }
