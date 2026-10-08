@@ -56,7 +56,7 @@ int main()
     s1.Accept();
     s1.Display();
 
-    String s2("shardul(Bauna Don)(5.4ft)");
+    String s2("shardul");
     s2.Display();
 
     String s3 = s2;
